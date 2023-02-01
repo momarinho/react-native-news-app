@@ -27,8 +27,9 @@ const All = () => {
 
   return (
     <NativeBaseProvider>
-      <ScrollView height={850}>
+      {newsData.length > 1 ? (
         <FlatList
+          height={850}
           data={newsData}
           renderItem={({ item }) => (
             <View>
@@ -53,7 +54,11 @@ const All = () => {
           )}
           keyExtractor={(item) => item.id}
         />
-      </ScrollView>
+      ) : (
+        <View style={styles.spinner}>
+          <Spinner color="danger.400" />
+        </View>
+      )}
     </NativeBaseProvider>
   );
 };
@@ -75,5 +80,11 @@ const styles = StyleSheet.create({
   },
   date: {
     fontSize: 14,
+  },
+  spinner: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 400,
   },
 });
